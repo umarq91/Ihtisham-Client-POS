@@ -1,6 +1,7 @@
 const express = require('express')
 const app  = express()
 const cors = require('cors');
+require('dotenv').config()
 const connectDb = require('./database/db')
 const KapraModel = require('./database/KapraModel')
 const RelationModel = require('./database/relationModel')
