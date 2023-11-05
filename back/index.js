@@ -163,7 +163,7 @@ app.post('/stocks/stocksupdate', async (req, res) => {
       existingDocument.meter= subtractmeter
       existingDocument.than = check; // Update the 'than' field in the document
       await existingDocument.save(); // Wait for the save operation to complete
-      await HistoryModel.create({name,than,meter,rate,purchaserate,stock:stocktype,billno:1,total:meter*rate,relation:'Client',personname:client})
+      await HistoryModel.create({name,than,meter,rate,purchaserate,stock:stocktype,billno:1,total:than*rate,relation:'Client',personname:client})
       console.log('Document updated successfully');
       res.json({ message: 'Document updated successfully' });
 

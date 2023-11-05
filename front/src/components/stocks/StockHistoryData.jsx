@@ -14,7 +14,7 @@ const StockHistoryData = ({users}) => {
                     return (
                      
 
-                       <tr key={index+1} className={`text-black font-semibold font-serif`}> 
+                       <tr key={index+1} className={`text-black font-semibold font-serif text-sm`}> 
                         
                             <td>{billno}</td>
                             <td>{personname} <span className="text-sm">({relation}) </span></td>
@@ -28,8 +28,8 @@ const StockHistoryData = ({users}) => {
                             <td>{meter}</td>
                             <td>{purchaserate}</td>
                             <td>{rate}</td>
-                            <td className="bg-green-400">{total} Rs</td>
-                            <td className="bg-green-400 px-8">{dateOnly}</td>
+                            <td className="bg-green-400 text-lg">{total} Rs</td>
+                            <td className="bg-green-400 text-sm">{dateOnly}</td>
 
 
 
