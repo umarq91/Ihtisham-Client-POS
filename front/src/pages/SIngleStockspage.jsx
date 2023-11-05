@@ -263,7 +263,7 @@ onChange={(e)=>setSupplier(e.target.value)}
                   id="subject"
                   name="subject"
                   type="text"
-                  placeholder="Enter Thaans quantity"
+                  placeholder="Enter Thaan quantity"
                   className="py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-xs lg:text-sm font-body placeholder-body min-h-12 transition duration-200 ease-in-out bg-white border-gray-300 focus:outline-none focus:border-heading h-11 md:h-12"
                   autoComplete="off"
                   spellCheck="false"
