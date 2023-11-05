@@ -18,6 +18,8 @@ const Navbar = () => {
        <Link className='text-[17px] hover:scale-105 hover:text-blue-300' to='/products'>Products </Link>
        <Link className='text-[17px] hover:scale-105 hover:text-blue-300' to='/relations'>Relations </Link>
        <Link className='text-[17px] hover:scale-105 hover:text-blue-300' to='/stocks'> Stocks </Link>
+       <Link className='text-[17px] hover:scale-105 hover:text-blue-300' to='/stockHistory'> History </Link>
+
 
        
 
