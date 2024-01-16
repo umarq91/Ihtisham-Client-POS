@@ -44,23 +44,40 @@ const postData = async (e)=>{
 useEffect(() => {
     let fetchData = async () => {
       let res = await fetch(`http://localhost:3000/products/${params.id}`).then((res) => res.json()).then((data) =>{
-
+     
           
           setname(data[0].name)
           
           setrate(data[0].rate)
-        
+       
+
         }
        
        );
     };
     fetchData();
   }, []);
+
+  useEffect(()=>{
+
+    if(stocktype!=='StockOut'){
+      
+      settotal(meter * purchaserate); // Use the updated meter value
+    }else{
+
+      settotal(meter * rate); // Use the updated meter value
+    }
+  },[rate,purchaserate,meter])
   
+
+
+
   const handleMeter = (e) => {
-    const newMeterValue = e.target.value;
-    setmeter(newMeterValue);
-    settotal(newMeterValue * rate); // Use the updated meter value
+    
+
+    setmeter(e.target.value);
+
+       
   };
 
  
@@ -160,27 +177,32 @@ onChange={(e)=>setSupplier(e.target.value)}
 
               </div>
 
-
-              <div className="w-full text-center">
-                <label
-                  htmlFor="subject"
-                  className=" block mr-2 white font-semibold text-sm leading-none mb-3 cursor-pointer"
-                >
-                Current Sell  Rate
-                </label>
-                <input
-                  
-    value={rate}
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  placeholder="Enter Thaans quantity"
-                  className="py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-xs lg:text-sm font-body placeholder-body min-h-12 transition duration-200 ease-in-out bg-white border-gray-300 focus:outline-none focus:border-heading h-11 md:h-12"
-                  autoComplete="off"
-                  spellCheck="false"
-                  aria-invalid="false"
-                />
-              </div>
+      {
+        stocktype ==='StockOut' && (
+          <div className="w-full text-center">
+          <label
+            htmlFor="subject"
+            className=" block mr-2 white font-semibold text-sm leading-none mb-3 cursor-pointer"
+          >
+          Current Sell  Rate
+          </label>
+          <input
+            
+value={rate}
+onChange={(e)=>setrate(e.target.value)}
+            id="subject"
+            name="subject"
+            type="text"
+            placeholder="Enter Thaans quantity"
+            className="py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-xs lg:text-sm font-body placeholder-body min-h-12 transition duration-200 ease-in-out bg-white border-gray-300 focus:outline-none focus:border-heading h-11 md:h-12"
+            autoComplete="off"
+            spellCheck="false"
+            aria-invalid="false"
+          />
+        </div>
+        )
+      }
+           
 
 <label className='font-bold text-2xl'> SELECT TYPE  </label>
 

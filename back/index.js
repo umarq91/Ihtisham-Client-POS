@@ -148,7 +148,7 @@ app.post('/stocks/stocksupdate', async (req, res) => {
   const { name, than, meter, stocktype, id ,rate,purchaserate,supplier,client} = req.body;
 
     const existingDocument = await KapraModel.findById(id);
-    let exisitingthan = existingDocument.than
+    let exisitingthan = existingDocument.than || 0
     let exisitingmeter = existingDocument.meter
 
     if (!existingDocument) {
