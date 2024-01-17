@@ -100,6 +100,7 @@ app.get('/relations',async(req,res)=>{
 })
 
 
+
 app.get('/relations/:id',async(req,res)=>{
    
   try {
@@ -189,22 +190,25 @@ app.post('/stocks/stocksupdate', async (req, res) => {
 });
 
 
-app.get('/stocks/history',async(req,res)=>{
+app.get('/stocks/history', async (req, res) => {
   console.log(req.query);
-  if (req.query.name) {
-    const query = {
-      $or: [
-        { name: { $regex: new RegExp(req.query.name, 'i') } }, // Case-insensitive match in the "name" property
-        { personname: { $regex: new RegExp(req.query.name, 'i') } }, // Case-insensitive match in the "personname" property
-        { billno: Number(req.query.name) }, // Case-insensitive match in the "personname" property
-      
-      ],
-    }
-    const data = await HistoryModel.find(query);
-  res.json(data);
-    }else{
 
-    let data = await HistoryModel.find()
-    res.json(data)
+  try {
+    if (req.query.name) {
+      const nameQuery = { name: { $regex: new RegExp(req.query.name, 'i') } };
+      const personNameQuery = { personname: { $regex: new RegExp(req.query.name, 'i') } };
+      // Consider whether billno should be matched directly as a number
+      // const billNoQuery = { billno: Number(req.query.name) };
+
+      const data = await HistoryModel.find({ $or: [nameQuery, personNameQuery /*, billNoQuery*/] });
+      res.json(data);
+    } else {
+      const data = await HistoryModel.find();
+      res.json(data);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-})
+});
+

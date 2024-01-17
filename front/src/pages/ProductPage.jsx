@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Products from '../components/Prodcuts'
 import { Link } from 'react-router-dom';
 const ProductPage = () => {
@@ -16,11 +16,16 @@ const ProductPage = () => {
    
   }
   
+  useEffect(()=>{
+console.log(api);
+  },[api])
+
 
   const handlecancel = (e)=>{
     setApi(Api)
     setSearch('')
   }
+  
   return (
     <div className='flex'>
       <div className='max-w-[75vw] bg-gray-300 w-full flex-2 overflow-scroll h-[100vh]'>

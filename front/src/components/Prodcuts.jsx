@@ -7,8 +7,8 @@ const Products = ({API}) => {
     const fetchUsers = async (url) => {
         try {
             const res = await fetch(url);
-            console.log(res);
             const data = await res.json();
+            console.log(data);
             if (data.length > 0) {
                 setUsers(data);
             }

@@ -53,22 +53,28 @@ const kapreEntry = async (req, res) => {
 
 
 
-    const getAllproducts= async(req,res)=>{
+    const getAllproducts = async (req, res) => {
+      console.log(req.query);
       if (req.query.name) {
+        console.log("test");
         const query = {
           $or: [
-            { name: req.query.name }, // Check for a match in the "NAME" property
-            { supplier: req.query.name }, // Check for a match in the "SUPPLIER" property
+            { name: { $regex: req.query.name, $options: 'i' } }, // Case-insensitive search for a match in the "name" property
+            { supplier: { $regex: req.query.name, $options: 'i' } }, // Case-insensitive search for a match in the "supplier" property
           ],
         }
         const data = await KapraModel.find(query);
-      res.json(data);
-        }else{
-
-        let data = await KapraModel.find()
-        res.json(data)
+        if (data.length > 0) {
+          res.json(data);
+        } else {
+          res.json({ message: 'No matching products found' });
+        }
+      } else {
+        let data = await KapraModel.find();
+        res.json(data);
       }
     }
+    
     
     
 module.exports={kapreEntry,relationEntry,HistoryEntry,getAllproducts}
