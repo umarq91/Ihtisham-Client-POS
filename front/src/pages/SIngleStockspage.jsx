@@ -16,7 +16,9 @@ const [successmessage,setSuccessMessage] = useState(false)
  const [total,settotal] = useState(0)
  const [purchaserate,setpurchaserate] = useState(0)
 const [client,setclient] = useState('')
+
 const params = useParams()
+console.log(supplier);
 
 
 const postData = async (e)=>{

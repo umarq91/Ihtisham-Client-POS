@@ -5,7 +5,6 @@ import Stocks from '../components/stocks/Stocks';
 
 const StocksPage = () => {
   const [selected,setselected] = useState('')
-  console.log(selected);
   let Api = `http://localhost:3000/products`;
   const [search, setSearch] = useState('')
  const [api,setApi] = useState(Api)

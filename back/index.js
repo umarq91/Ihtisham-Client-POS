@@ -147,7 +147,7 @@ app.post('/relations/relationedit', async (req, res) => {
 
 app.post('/stocks/stocksupdate', async (req, res) => {
   const { name, than, meter, stocktype, id ,rate,purchaserate,supplier,client} = req.body;
-
+  console.log(req.body);
     const existingDocument = await KapraModel.findById(id);
     let exisitingthan = existingDocument.than || 0
     let exisitingmeter = existingDocument.meter
@@ -164,24 +164,19 @@ app.post('/stocks/stocksupdate', async (req, res) => {
       existingDocument.meter= subtractmeter
       existingDocument.than = check; // Update the 'than' field in the document
       await existingDocument.save(); // Wait for the save operation to complete
-      await HistoryModel.create({name,than,meter,rate,purchaserate,stock:stocktype,billno:1,total:than*rate,relation:'Client',personname:client})
-      console.log('Document updated successfully');
+      await HistoryModel.create({name,than,meter,rate,purchaserate,stock:stocktype,billno:1,total:than*rate,relation:'Client',personname:supplier})
+      console.log('Stock Out Document updated successfully');
       res.json({ message: 'Document updated successfully' });
 
-    }
-    
-    
-    
-    // Stock In
-    else if(stocktype==='StockIn'){
+    } else{
       let check = exisitingthan + Number(than);
       let addmeter = exisitingmeter + Number(meter)
       existingDocument.meter= addmeter
       
       existingDocument.than = check; // Update the 'than' field in the document
       await existingDocument.save(); // Wait for the save operation to complete
-      console.log('Document updated successfully');
-      await HistoryModel.create({name,than,meter,rate,purchaserate,stock:stocktype,billno:1,total:meter*rate,relation:'Supplier',personname:supplier})
+      console.log('Stock In Document updated successfully');
+      await HistoryModel.create({name,than,meter,rate,purchaserate,stock:stocktype,billno:1,total:meter*rate,relation:'Supplier',personname:client})
 
       res.json({ message: 'Document updated successfully' });
     }

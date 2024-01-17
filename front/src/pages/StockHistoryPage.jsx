@@ -21,6 +21,8 @@ const StockHistoryPage = () => {
     setApi(Api)
     setSearch('')
   }
+
+  
   return (
     <div className=''>
        <div className='flex-1 mx-auto items-center flex justify-center'>

@@ -1,45 +1,38 @@
 import { useState } from "react";
 import {Link} from 'react-router-dom'
-const StockHistoryData = ({users}) => {
-  const [red, setred] = useState('')
-   
+const StockHistoryData = ({user,date}) => {
+
+ 
+  var dateOnly = user.createdAt.split('T')[0];
+
     return (
         <>
-            {
-                users.map((curUser,index) => {
 
-                    const {name,supplier,than,meter,rate,_id,billno,personname,relation,purchaserate,total,createdAt} = curUser;
-                    var dateOnly = createdAt.split('T')[0];
-                  
-                    return (
-                     
-
-                       <tr key={index+1} className={`text-black font-semibold font-serif text-sm`}> 
+                       <tr  className={`text-black font-semibold font-serif text-sm ${user.stock==='StockOut'? 'bg-red-300' : 'bg-green-200'}`}> 
                         
-                            <td>{billno}</td>
-                            <td>{personname} <span className="text-sm">({relation}) </span></td>
-                            <td className="underline hover:text-blue-400 hover:pointer hover:scale-105 bg-green-400 ">
-              <Link to={`/stocks/${_id}`} style={{ textDecoration: "none", color: "inherit" }}>
-                {name}
-              </Link>
+                            <td>{user.billno}</td>
+                            <td>{user.personname} <span className="text-sm">({user.relation}) </span></td>
+                            <td className="underline hover:text-blue-400 hover:pointer hover:scale-105 cursor-pointer ">
+              
+                {user.name}
+              
             </td>
-                            <td className={` ${than<3 && 'bg-red-700' }`}>{than}</td>
+                            <td>{user.than}</td>
                             
-                            <td>{meter}</td>
-                            <td>{purchaserate}</td>
-                            <td>{rate}</td>
-                            <td className="bg-green-400 text-lg">{total} Rs</td>
-                            <td className="bg-green-400 text-sm">{dateOnly}</td>
+                            <td>{user.meter}</td>
+                            <td>{user.purchaserate}</td>
+                            <td>{user.rate}</td>
+                            <td className=" text-lg">{user.total} Rs</td>
+                            <td className=" text-sm">{dateOnly}</td>
 
 
 
 
                         </tr>
                       
-                    )
-                })
+           
+             
 
-            }
         </>
     )
 }

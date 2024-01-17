@@ -11,7 +11,7 @@ const StocksHistory = ({API}) => {
         try {
             const res = await fetch(url);
             const data = await res.json();
-            console.log(data);
+        
             if (data.length > 0) {
                 setUsers(data.reverse());
             }
@@ -27,16 +27,17 @@ const StocksHistory = ({API}) => {
 
     
     return <>
+    
         <table className="w-full  items-center ">
             <thead className="">
             <tr className="">
-            <th className="px-2">BillNo</th>
+            <th className="px-2">BNo</th>
                 
                 <th>Buyer/seller</th>
                 <th className="">Product</th>
                 <th className="px-2">Than</th>
                 <th className="">Meter</th>
-                <th className="">Purchase Rate</th>
+                <th className="">P Rate</th>
                 <th className="">Sell Rate</th>
                 <th className="">Total</th>
                 <th className="">Date</th>
@@ -44,7 +45,14 @@ const StocksHistory = ({API}) => {
             </tr>
             </thead>
             <tbody>
-            <StocksHistoryData  users={users}/>
+            {
+  users.map((curUser, index) => {
+
+    
+    return <StocksHistoryData key={index} user={curUser} />;
+  })
+}
+            
             </tbody>
         </table>
     </>
